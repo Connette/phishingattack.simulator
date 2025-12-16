@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulation Area</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="logo.svg" alt="Logo" class="logo">
+        </div>
+        <h1>Phishing Attack Simulator</h1>
+        <div class="toggle-container">
+            <span style="font-weight: bold;">Dark Mode</span>
+            <label class="switch">
+                <input type="checkbox" id="toggleDark">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <button class="logout-btn" onclick="logout()" aria-label="Logout">
+            <svg class="logout-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <path d="M12 2v11" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 12a7 7 0 0014 0" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="logout-text">Logout</span>
+        </button>
+    </div>
+
+    <nav class="nav">
+        <a href="dashboard.html" class="nav-link">Dashboard & Scenarios</a>
+        <a href="analysis.html" class="nav-link">Analysis Templates</a>
+        <a href="receive.html" class="nav-link">User's POV</a>
+        <a href="simulation.html" class="nav-link active">Simulation Area</a>
+    </nav>
+    
+    <div class="simulation-container">
+        <div class="card">
+            <h2 style="text-align:center">💻 Phishing Simulation Area</h2>
+            <p style="text-align:center; margin-bottom: 25px;">The selected phishing scenario appears here. Do not enter real credentials! </p>
+            
+            <div id="simulationContainer" style="min-height: 250px; text-align: center;">
+                <p>Select a scenario from the <strong>Dashboard & Scenarios</strong> page to begin.</p>
+                <div class="card phishing-box" id="phishingBox">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load the selected template when the simulation page loads
+            const type = localStorage.getItem('currentPhishTemplate');
+            if (type) {
+                // Manually construct and inject the content since we can't call loadTemplate directly
+                const box = document.getElementById('phishingBox');
+                box.style.display = 'block';
+                let content = '';
+
+                if (type === 'email') {
+                    content = `
+                        <h3>⚠️ Account Restricted!</h3>
+                        <p>Please login to verify your identity.</p>
+                        <div class="input-box">
+                            <input type="email" id="email" placeholder="Enter Email" />
+                            <input type="password" id="password" placeholder="Enter Password" />
+                            <button class="login-btn" onclick="submitPhish()">Verify Now</button>
+                        </div>
+                        <p class="result" id="resultMsg"></p>
+                    `;
+                } else if (type === 'bank') {
+                    content = `
+                        <h3>🏦 Bank Security Alert</h3>
+                        <p>We detected unusual activity. Login immediately.</p>
+                        <div class="input-box">
+                            <input type="text" id="email" placeholder="Card Number / Username" />
+                            <input type="password" id="password" placeholder="Online Banking Password" />
+                            <button class="login-btn" onclick="submitPhish()">Secure Account</button>
+                        </div>
+                        <p class="result" id="resultMsg"></p>
+                    `;
+                } else if (type === 'popup') {
+                    content = `
+                        <h3>⚠️ SECURITY WARNING</h3>
+                        <p>Your device is at risk! Login to restore protection.</p>
+                        <div class="input-box">
+                            <input type="text" id="email" placeholder="Username" />
+                            <input type="password" id="password" placeholder="Password" />
+                            <button class="login-btn" onclick="submitPhish()">Fix Issue</button>
+                        </div>
+                        <p class="result" id="resultMsg"></p>
+                    `;
+                }
+                box.innerHTML = content;
+                localStorage.removeItem('currentPhishTemplate'); // Clear the flag
+            }
+        });
+    </script>
+</body>
+</html>

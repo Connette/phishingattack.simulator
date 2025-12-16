@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Templates</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="logo.svg" alt="Logo" class="logo">
+        </div>
+        <h1>Phishing Attack Simulator</h1>
+        <div class="toggle-container">
+            <span style="font-weight: bold;">Dark Mode</span>
+            <label class="switch">
+                <input type="checkbox" id="toggleDark">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <button class="logout-btn" onclick="logout()" aria-label="Logout">
+            <svg class="logout-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <path d="M12 2v11" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 12a7 7 0 0014 0" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="logout-text">Logout</span>
+        </button>
+    </div>
+
+    <nav class="nav">
+        <a href="dashboard.html" class="nav-link">Dashboard & Scenarios</a>
+        <a href="analysis.html" class="nav-link active">Analysis Templates</a>
+        <a href="receive.html" class="nav-link">User's POV</a>
+        <a href="simulation.html" class="nav-link">Simulation Area</a>
+    </nav>
+    
+    <div class="analysis-container">
+
+        <div class="card" id="scenario-email">
+            <h2>Scenario 1: Email Lockout Analysis 📧</h2>
+            <p>This template demonstrates an <strong>account lockout</strong> scam using <strong>urgency</strong> and <strong>fear</strong>.</p>
+            
+            <div class="template-preview">
+                <h3>Simulated Account Phishing Email</h3>
+                <p><strong>From:</strong> no-reply@gmail-security.com (Notice the <strong>suspicious domain</strong>)</p>
+                <p><strong>To:</strong> <span id="simEmailTarget">trainee@example.com</span></p>
+                <p><strong>Subject:</strong> Important: Action Required on Your Google Account</p>
+                <p>
+                    Dear user,<br><br>
+                    We detected unusual security activity in your Google account. Please verify your login details to avoid account suspension. (The <strong>Threat</strong>)<br><br>
+                    <a href="#" id="simEmailLink" style="color:#2563eb;">Verify your account</a> (The <strong>Payload</strong>)
+                    <p style="font-size: small; margin: 0; padding-top: 10px; border-top: 1px dashed var(--border);">
+                        <strong>WARNING:</strong> Clicking this link in the simulation counts as a failure!
+                    </p>
+                </p>
+            </div>
+            
+            <div style="margin-top:15px; display:flex; flex-direction:column; gap:10px;">
+                <input type="text" id="targetEmailInput" class="input-box" placeholder="Enter simulated recipient email" />
+                <button class="template-btn" onclick="setSimEmail()">Update Email Target</button>
+                <button class="template-btn" onclick="loadReceiveTemplate('email');">Try This Scenario</button>
+            </div>
+        </div>
+
+        <div class="card" id="scenario-bank">
+            <h2>Scenario 2: Bank Alert Analysis 🏦</h2>
+            <p>This template targets <strong>financial data</strong> and is often crafted to look highly official.</p>
+            
+            <div class="template-preview bank">
+                <h3>Simulated Urgent Bank Security Alert</h3>
+                <p><strong>URL Bar:</strong> <span style="color:var(--danger);">https://www.yourbank.com-secures.net/login</span> (Look for <strong>typos</strong> or <strong>extra suffixes</strong> in the URL)</p>
+                <hr style="border-top: 1px solid var(--border);">
+                <h4>Immediate Action Required: Unusual Activity Detected</h4>
+                <p>
+                    We have temporarily suspended online access to your account due to suspicious transactions...<br><br>
+                    <span style="font-weight:bold; color:var(--danger);">FAILURE TO ACT WITHIN 24 HOURS WILL RESULT IN ACCOUNT LOCKOUT.</span> (Creates <strong>extreme urgency</strong>)<br><br>
+                    <a href="#" onclick="loadReceiveTemplate('bank'); return false;" style="color:#2563eb;">Click Here to Log In Securely</a>
+                </p>
+            </div>
+            <div style="margin-top:15px; display:flex; flex-direction:column; gap:10px;">
+                <button class="template-btn" onclick="loadReceiveTemplate('bank');">Try This Scenario</button>
+            </div>
+        </div>
+
+        <div class="card" id="scenario-popup">
+            <h2>Scenario 3: OS Warning Analysis ⚠️</h2>
+            <p>This template uses technical language to simulate a <strong>device compromise</strong> (scareware) and prompt a quick, fearful action.</p>
+            
+            <div class="template-preview os-warning">
+                <h3>CRITICAL SYSTEM ALERT (POP-UP)</h3>
+                <p style="color:var(--danger); font-weight:bold;">ERROR CODE: 0x80070005</p>
+                <p>
+                    <strong>Unsecured Connection Detected!</strong> Your IP address is broadcasting sensitive information.<br><br>
+                    <strong>Action Required:</strong> Your firewall has been compromised. Please re-validate your device login credentials immediately.<br><br>
+                    <span style="color:var(--primary); font-style:italic;">Note: This is a browser pop-up. Legitimate OS warnings don't usually appear directly in the browser.</span>
+                </p>
+            </div>
+            <div style="margin-top:15px; display:flex; flex-direction:column; gap:10px;">
+                <button class="template-btn" onclick="loadReceiveTemplate('popup');">Try This Scenario</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

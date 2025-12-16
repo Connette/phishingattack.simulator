@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome - Phishing Defense Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="welcome-container">
+        <div class="welcome-content">
+            <div class="floating-logo-wrapper">
+                <img src="logo.svg" alt="Logo" class="welcome-logo">
+            </div>
+            
+            <div class="welcome-text">
+                <h1>Welcome to Phishing Attack Simulator</h1>
+                <p>Learn to identify and defend against phishing attacks through interactive scenarios. Train your instincts and become a phishing defense expert.</p>
+                <p class="click-to-start"> <br> Click Anywhere to Start</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Handle dark mode toggle
+        const toggleDark = document.createElement('input');
+        toggleDark.type = 'checkbox';
+        toggleDark.id = 'toggleDark';
+        
+        const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+        if (darkModeEnabled) {
+            document.documentElement.classList.add('dark');
+            toggleDark.checked = true;
+        }
+        
+        toggleDark.addEventListener('change', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+        });
+
+        // Click anywhere to navigate to dashboard
+        document.addEventListener('click', () => {
+            window.location.href = 'dashboard.html';
+        });
+
+        // Also allow pressing any key to start
+        document.addEventListener('keydown', () => {
+            window.location.href = 'dashboard.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard & Scenarios</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="logo.svg" alt="Logo" class="logo">
+        </div>
+        <h1>Phishing Attack Simulator</h1>
+        <div class="toggle-container">
+            <span style="font-weight: bold;">Dark Mode</span>
+            <label class="switch">
+                <input type="checkbox" id="toggleDark">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <button class="logout-btn" onclick="logout()" aria-label="Logout">
+            <svg class="logout-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <path d="M12 2v11" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 12a7 7 0 0014 0" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="logout-text">Logout</span>
+        </button>
+    </div>
+
+    <nav class="nav">
+        <a href="dashboard.html" class="nav-link active">Dashboard & Scenarios</a>
+        <a href="analysis.html" class="nav-link">Analysis Templates</a>
+        <a href="receive.html" class="nav-link">User's POV</a>
+        <a href="simulation.html" class="nav-link">Simulation Area</a>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <div class="card" id="dashboard">
+            <h2> Simulation Dashboard</h2>
+            <p style="text-align:center;">Your current training performance is saved locally.</p>
+            <div class="stats">
+                <div class="stat-box"><h3 id="attempts">0</h3><span style="font-size: 0.8em;">Total Attempts</span></div>
+                <div class="stat-box"><h3 id="fails">0</h3><span style="font-size: 0.8em;">Fell for Attack</span></div>
+                <div class="stat-box"><h3 id="avoided">0</h3><span style="font-size: 0.8em;">Avoided Successfully</span></div>
+            </div>
+            <div style="text-align: center; margin-top: auto; padding-top: 20px;">
+                <button class="reset-btn" onclick="resetStatistics()">🔄 Reset Statistics</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Select a Phishing Scenario</h2>
+            <p style="text-align:center; font-size: 0.9em;">Clicking a button will start the simulation on the next page.</p>
+            <div style="display:flex;flex-direction:column;gap:15px; margin-top: auto;">
+                <button class="template-btn" onclick="startAnalysisScenario('email')">Fake Email Account Lockout</button>
+                <button class="template-btn" onclick="startAnalysisScenario('bank')">Fake Bank Security Alert</button>
+                <button class="template-btn" onclick="startAnalysisScenario('popup')">Fake OS Security Warning</button>
+            </div>
+        </div>
+        
+        <div class="card wide-card" id="theft-board">
+            <h2>⚠️ Compromised Credentials ⚠️</h2>
+            <p style="text-align:center; font-size: 0.9em;">(Your simulated data that was "stolen" in past failures)</p>
+            <ul id="compromisedList" class="theft-list">
+                <li style="text-align:center; opacity: 0.7;">No credentials compromised yet. Keep up the good work!</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
